@@ -7,6 +7,9 @@ import (
 	"io/ioutil"
 	"net/http"
 	"time"
+	
+	"google.golang.org/appengine"
+	"google.golang.org/appengine/urlfetch"
 )
 
 const (
@@ -152,7 +155,7 @@ func (this *FcmClient) apiKeyHeader() string {
 }
 
 // sendOnce send a single request to fcm
-func (this *FcmClient) sendOnce() (*FcmResponseStatus, error) {
+func (this *FcmClient) sendOnce(r *http.Request) (*FcmResponseStatus, error) {
 
 	fcmRespStatus := new(FcmResponseStatus)
 
@@ -165,9 +168,17 @@ func (this *FcmClient) sendOnce() (*FcmResponseStatus, error) {
 	request.Header.Set("Authorization", this.apiKeyHeader())
 	request.Header.Set("Content-Type", "application/json")
 
-	client := &http.Client{}
-	response, err := client.Do(request)
-
+	var client *http.Client
+	var response *http.Response
+	if r == nil {
+		client = &http.Client{}
+		response, err = client.Do(request)
+	} else {
+		ctx := appengine.NewContext(r)
+	    client = urlfetch.Client(ctx)
+	    response, err = client.Do(request)
+	}
+	
 	if err != nil {
 		return fcmRespStatus, err
 	}
@@ -197,7 +208,13 @@ func (this *FcmClient) sendOnce() (*FcmResponseStatus, error) {
 
 // Send to fcm
 func (this *FcmClient) Send() (*FcmResponseStatus, error) {
-	return this.sendOnce()
+	return this.sendOnce(nil)
+
+}
+
+// Send to fcm appengine
+func (this *FcmClient) SendAppengine(r *http.Request) (*FcmResponseStatus, error) {
+	return this.sendOnce(r)
 
 }
 

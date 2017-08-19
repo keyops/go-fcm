@@ -1,9 +1,8 @@
 # go-fcm : FCM Library for Go
 
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg?style=flat-square)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=MYW4MY786JXFN&lc=GB&item_name=go%2dfcm%20development&item_number=go%2dfcm&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
-[![AUR](https://img.shields.io/aur/license/yaourt.svg?style=flat-square)](https://github.com/NaySoftware/go-fcm/blob/master/LICENSE)
-
 Firebase Cloud Messaging ( FCM ) Library using golang ( Go )
+Updated for App Engine
+Forked from github.com/NaySoftware/go-fcm
 
 This library uses HTTP/JSON Firebase Cloud Messaging connection server protocol
 
@@ -25,12 +24,12 @@ This library uses HTTP/JSON Firebase Cloud Messaging connection server protocol
 ## Usage
 
 ```
-go get github.com/NaySoftware/go-fcm
+go get github.com/keyops/go-fcm
 ```
 
 ## Docs - go-fcm API
 ```
-https://godoc.org/github.com/NaySoftware/go-fcm
+https://godoc.org/github.com/keyops/go-fcm
 ```
 
 ####  Firebase Cloud Messaging HTTP Protocol Specs
@@ -106,7 +105,7 @@ package main
 
 import (
 	"fmt"
-    "github.com/NaySoftware/go-fcm"
+    "github.com/keyops/go-fcm"
 )
 
 const (
@@ -148,7 +147,7 @@ package main
 
 import (
 	"fmt"
-    "github.com/NaySoftware/go-fcm"
+    "github.com/keyops/go-fcm"
 )
 
 const (
